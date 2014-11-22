@@ -22,17 +22,18 @@ else
 fi
 rm -f ./links/*.*
 
-if [ "$(pidof motion)" ] 
+if [ $(pidof motion) ] 
  then 
    echo "motion is already running so will make video" 
+   exit
    NOW=$(date +"%y_%m_%d_%H:%M")
    FILE=$NOW.mp4
    echo $FILE
    
- x=1; for i in $(ls -r -t *jpg); do counter=$(printf %04d $x); ln -s ../"$i" ./links/"$counter".jpg; x=$(($x+1)); done
+ x=1; for i in $(ls -r -t *jpg); do counter=$(printf %04d $x); ln -s ../"$i" ./links/"$counter".jpg; x=$((x+1)); done
 
    cd ./links || exit ;
-   avconv -r 30 -i %04d.jpg -vcodec mpeg4 $FILE
+   avconv -r 30 -i %04d.jpg -b 2000k -vcodec mpeg4 $FILE
    #rcp ./$FILE sacarlson@192.168.2.250:/home/sacarlson/GoogleDrive/motion/$FILE
    # delete any mp4 files that are older than 30 days old
    find . -name '*.mp4' -mtime +30 -exec rm {} \;

@@ -31,7 +31,7 @@ echo $FILE
 echo "combine link complete \n"
 
 cd ./links || exit ;
-avconv -r 30 -i %04d.jpg -vcodec mpeg4 $FILE
+avconv -r 30 -i %04d.jpg -b 2000k -vcodec mpeg4 $FILE
 #avconv -r 30 -i %04d.jpg -s hd1080 -vcodec mpeg4 $FILE
 cp $FILE ../../today_$FILE
 echo "video conversion completed \n"

@@ -64,8 +64,8 @@ tlast=$x
 done
 
 cd ./links || exit;
-avconv -r 30 -i %04d.jpg -vcodec mpeg4 $FILE
-#avconv -r 30 -i %04d.jpg -s hd1080 -vcodec mpeg4 $FILE
+avconv -r 30 -i %04d.jpg -b 2000k -vcodec mpeg4 $FILE
+#avconv -r 30 -i %04d.jpg -s hd1080 -b 4000k -vcodec mpeg4 $FILE
 cp $FILE ../../events_$FILE
 echo "video conversion completed \n"
 vlc ./$FILE

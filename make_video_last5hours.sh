@@ -29,11 +29,11 @@ NOW=$(date +"%y_%m_%d_%H:%M")
 FILE=$NOW.mp4
 echo $FILE
 
- x=1; for i in $(find . -maxdepth 1 -mtime -0.2 -iname "*.JPG" -printf "%T@ %Tc %p\n" | sort -n | grep -oE '[^ ]+$'); do counter=$(printf %04d $x); ln -s ../"$i" ./links/"$counter".jpg; x=$(($x+1)); done
+ x=1; for i in $(find . -maxdepth 1 -mtime -0.2 -iname "*.JPG" -printf "%T@ %Tc %p\n" | sort -n | grep -oE '[^ ]+$'); do counter=$(printf %04d $x); ln -s ../"$i" ./links/"$counter".jpg; x=$((x+1)); done
 echo "combine link complete \n"
 
 cd ./links || exit;
-avconv -r 30 -i %04d.jpg -vcodec mpeg4 $FILE
+avconv -r 30 -i %04d.jpg -b 2000k -vcodec mpeg4 $FILE
 #avconv -r 30 -i %04d.jpg -s hd1080 -vcodec mpeg4 $FILE
 cp $FILE ../../last_5_hours_$FILE
 echo "video conversion completed \n"
