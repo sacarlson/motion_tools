@@ -1,0 +1,3 @@
+# start motion at boot and clean out old motion images over time to save disk space every week.
+@reboot /home/sacarlson/motion/start_motion.sh
+0 5 * * 1 /home/sacarlson/motion/delete_old_images.sh
